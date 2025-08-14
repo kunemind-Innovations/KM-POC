@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<title>Shopping Cart - ShopEase</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  main {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem 3rem;
+  }
+
+  .cart-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .cart-table th, .cart-table td {
+    padding: 1rem 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .cart-table th {
+    font-weight: 700;
+    color: #2c3e50;
+  }
+
+  .product-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .product-info img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+  .product-name {
+    font-weight: 600;
+  }
+
+  .quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .quantity-selector button {
+    background: #3498db;
+    border: none;
+    color: white;
+    padding: 0.3rem 0.7rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    user-select: none;
+    transition: background-color 0.3s;
+  }
+  .quantity-selector button:hover {
+    background: #2980b9;
+  }
+  .quantity-selector input[type="number"] {
+    width: 50px;
+    text-align: center;
+    font-size: 1rem;
+    padding: 0.2rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+
+  .subtotal {
+    font-weight: 600;
+    color: #27ae60;
+  }
+
+  .total-section {
+    margin-top: 2rem;
+    text-align: right;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #2c3e50;
+  }
+
+  .checkout-btn {
+    margin-top: 1rem;
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .checkout-btn:hover {
+    background: #1e8449;
+  }
+
+  @media(max-width: 600px) {
+    .product-info {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    .cart-table th, .cart-table td {
+      padding: 0.75rem 0.25rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="navbar">
+    <div class="logo">ShopEase</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="category.html">Shop</a></li>
+        <li><a href="arts.html">Arts</a></li>
+        <li><a href="perfumes.html">Perfumes</a></li>
+        <li><a href="clothes.html">Clothes</a></li>
+      </ul>
+    </nav>
+    <div class="nav-icons">
+      <!-- Removed search icon -->
+      <a href="cart.html" title="Cart">&#128722;</a>
+    </div>
+  </div>
+  <div class="search-bar">
+    <input type="search" id="categorySearch" placeholder="Search in category..." />
+  </div>
+</header>
+
+
+<main>
+  <h1>Your Shopping Cart</h1>
+  <table class="cart-table" aria-label="Shopping Cart Items">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody id="cartItems">
+      <tr data-price="2499">
+        <td>
+          <div class="product-info">
+            <img src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=400&q=80" alt="Modern Art Canvas" />
+            <div class="product-name">Modern Art Canvas</div>
+          </div>
+        </td>
+        <td>₹2,499</td>
+        <td>
+          <div class="quantity-selector">
+            <button class="decrement-btn" aria-label="Decrease quantity">−</button>
+            <input type="number" value="1" min="1" />
+            <button class="increment-btn" aria-label="Increase quantity">+</button>
+          </div>
+        </td>
+        <td class="subtotal">₹2,499</td>
+      </tr>
+      <tr data-price="1799">
+        <td>
+          <div class="product-info">
+            <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=400&q=80" alt="Elegant Perfume Bottle" />
+            <div class="product-name">Elegant Perfume</div>
+          </div>
+        </td>
+        <td>₹1,799</td>
+        <td>
+          <div class="quantity-selector">
+            <button class="decrement-btn" aria-label="Decrease quantity">−</button>
+            <input type="number" value="2" min="1" />
+            <button class="increment-btn" aria-label="Increase quantity">+</button>
+          </div>
+        </td>
+        <td class="subtotal">₹3,598</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="total-section" aria-live="polite">
+    Total: ₹<span id="totalPrice">6,097</span>
+  </div>
+  <button class="checkout-btn" onclick="window.location.href='checkout.html'">Proceed to Checkout</button>
+</main>
+
+ <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+      // Load footer.html into the placeholder
+      fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('footer-placeholder').innerHTML = data;
+        })
+        .catch(err => console.error('Footer failed to load:', err));
+    </script>
+
+<script>
+  function updateSubtotal(row) {
+    const price = Number(row.dataset.price);
+    const quantityInput = row.querySelector('input[type="number"]');
+    const subtotalCell = row.querySelector('.subtotal');
+    const quantity = parseInt(quantityInput.value, 10);
+
+    const subtotal = price * quantity;
+    subtotalCell.textContent = '₹' + subtotal.toLocaleString('en-IN');
+    return subtotal;
+  }
+
+  function updateTotal() {
+    const rows = document.querySelectorAll('#cartItems tr');
+    let total = 0;
+    rows.forEach(row => {
+      total += updateSubtotal(row);
+    });
+    document.getElementById('totalPrice').textContent = total.toLocaleString('en-IN');
+  }
+
+  document.querySelectorAll('.decrement-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const input = btn.parentElement.querySelector('input[type="number"]');
+      let current = parseInt(input.value, 10);
+      if (current > 1) {
+        input.value = current - 1;
+        updateTotal();
+      }
+    });
+  });
+
+  document.querySelectorAll('.increment-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const input = btn.parentElement.querySelector('input[type="number"]');
+      let current = parseInt(input.value, 10);
+      input.value = current + 1;
+      updateTotal();
+    });
+  });
+
+  document.querySelectorAll('input[type="number"]').forEach(input => {
+    input.addEventListener('change', () => {
+      if (input.value < 1 || isNaN(input.value)) {
+        input.value = 1;
+      }
+      updateTotal();
+    });
+  });
+
+  // Initial total calculation
+  updateTotal();
+</script>
+
+</body>
+</html>

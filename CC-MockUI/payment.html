@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Payment - ShopEase</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    main {
+      max-width: 500px;
+      margin: 2rem auto;
+      padding: 0 1rem 3rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #2c3e50;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      color: #34495e;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="month"],
+    input[type="password"] {
+      width: 100%;
+      padding: 0.6rem 0.8rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      transition: border-color 0.3s;
+    }
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    input[type="month"]:focus,
+    input[type="password"]:focus {
+      outline: none;
+      border-color: #3498db;
+    }
+
+    button[type="submit"] {
+      margin-top: 1.5rem;
+      background: #27ae60;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button[type="submit"]:hover {
+      background: #1e8449;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="navbar">
+    <div class="logo">ShopEase</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="category.html" class="active">Shop</a></li>
+        <li><a href="arts.html">Arts</a></li>
+        <li><a href="perfumes.html">Perfumes</a></li>
+        <li><a href="clothes.html">Clothes</a></li>
+      </ul>
+    </nav>
+    <div class="nav-icons">
+      <!-- Removed search icon -->
+      <a href="cart.html" title="Cart">&#128722;</a>
+    </div>
+  </div>
+  <div class="search-bar">
+            <i class="fa fa-search"></i>
+            <input type="search" id="categorySearch" placeholder="Search product" />
+        </div>
+</header>
+
+
+<main>
+  <h1>Payment</h1>
+  <form id="paymentForm">
+    <label for="cardName">Cardholder Name</label>
+    <input type="text" id="cardName" name="cardName" required />
+
+    <label for="cardNumber">Card Number</label>
+    <input type="text" id="cardNumber" name="cardNumber" maxlength="19" pattern="[0-9\s]{13,19}" placeholder="xxxx xxxx xxxx xxxx" required />
+
+    <label for="expiryDate">Expiry Date</label>
+    <input type="month" id="expiryDate" name="expiryDate" required />
+
+    <label for="cvv">CVV</label>
+    <input type="password" id="cvv" name="cvv" maxlength="4" pattern="[0-9]{3,4}" required />
+
+    <button type="submit">Pay Now</button>
+  </form>
+</main>
+
+ <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+      // Load footer.html into the placeholder
+      fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('footer-placeholder').innerHTML = data;
+        })
+        .catch(err => console.error('Footer failed to load:', err));
+    </script>
+
+<script>
+  const paymentForm = document.getElementById('paymentForm');
+  paymentForm.addEventListener('submit', e => {
+    e.preventDefault();
+    alert('Payment processed successfully! Redirecting to order confirmation...');
+    window.location.href = 'order-confirmation.html';
+  });
+</script>
+
+</body>
+</html>

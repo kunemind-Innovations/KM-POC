@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Perfumes - ShopEase</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    main {
+      /* max-width: 700px; */
+      margin: 2rem auto;
+      padding: 0 1rem 3rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    }
+
+    main h2 {
+      font-weight: 700;
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Layout: filters sidebar + products grid */
+    .page-container {
+      display: flex;
+      gap: 2rem;
+    }
+
+    /* Filters sidebar */
+    .filters {
+      flex: 0 0 220px;
+    }
+
+    .filters h3 {
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .filters .filter-box {
+      background: #fff;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+    }
+
+    .filters label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .price-range {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+
+    input[type="range"] {
+      width: 100%;
+    }
+
+    .clear-all {
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      color: #475569;
+      text-decoration: underline;
+      margin-left: 1rem;
+      user-select: none;
+    }
+
+    /* Products grid */
+    .products-section {
+      flex: 1;
+    }
+
+    .products-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      color: #475569;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      /* First row 3 items */
+      gap: 20px;
+    }
+
+    .products-grid article:nth-child(n+4) {
+      grid-column: span 1;
+      /* Make them take only one column */
+    }
+
+    .products-grid article:nth-child(4),
+    .products-grid article:nth-child(5) {
+      grid-column: span 1;
+      /* Adjust to ensure second row has only 2 items */
+    }
+
+    .products-grid article:nth-child(4) {
+      grid-column: 1 / span 1;
+      /* Start at first column */
+    }
+
+    .products-grid article:nth-child(5) {
+      grid-column: 2 / span 1;
+      /* Start at second column */
+    }
+
+
+    .product-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* Centers everything horizontally */
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      text-align: center;
+      /* Centers text inside */
+    }
+
+    .product-card:hover {
+      transform: scale(1.03);
+    }
+
+    .product-card img {
+      border-radius: 8px;
+      width: 100%;
+      height: auto;
+      margin-bottom: 1rem;
+      object-fit: cover;
+    }
+
+    .brand,
+    .product-title,
+    .price {
+      text-align: center;
+      /* Ensures text alignment */
+    }
+
+    .brand {
+      font-weight: 500;
+      color: #555;
+      margin-bottom: 0.3rem;
+    }
+
+    .product-info {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .product-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #0f172a;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #0f172a;
+      margin-bottom: 0.5rem;
+    }
+
+    .price {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #475569;
+      margin-bottom: 1rem;
+    }
+
+    .add-to-cart-btn {
+      background-color: #000000;
+      /* Black background */
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.2s ease;
+    }
+
+    .add-to-cart-btn:hover {
+      background-color: #333333;
+    }
+
+    select.sort-select {
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="navbar">
+      <div class="logo">Craze Crompt</div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="category.html">Shop</a></li>
+          <li><a href="arts.html">Arts</a></li>
+          <li><a href="perfumes.html" class="active">Perfumes</a></li>
+          <li><a href="clothes.html">Clothes</a></li>
+        </ul>
+      </nav>
+      <div class="nav-icons">
+        <!-- Removed search icon -->
+        <a href="cart.html" title="Cart">&#128722;</a>
+      </div>
+    </div>
+    <div class="search-bar">
+      <i class="fa fa-search"></i>
+      <input type="search" id="categorySearch" placeholder="Search product" />
+    </div>
+  </header>
+
+
+  <main>
+    <h1>Perfumes</h1>
+    <br>
+    <p class="subtitle">Discover our curated collection of perfumes</p>
+
+    <br>
+
+    <div class="page-container">
+
+      <!-- Filters Sidebar -->
+      <aside class="filters">
+        <div style="display:flex; align-items:center; margin-bottom:1rem;">
+          <strong>Filters</strong>
+          <span class="clear-all">Clear All</span>
+        </div>
+
+        <div class="filter-box">
+          <label for="priceRange"><strong>Price Range</strong></label>
+          <input type="range" id="priceRange" min="0" max="5000" value="2500" />
+          <div class="price-range">
+            <span>₹0</span>
+            <span>₹5000</span>
+          </div>
+        </div>
+
+        <div class="filter-box">
+          <label><strong>Brands</strong></label>
+          <label><input type="checkbox" name="brand" /> Perfume House</label>
+          <label><input type="checkbox" name="brand" /> Luxury Scents</label>
+          <label><input type="checkbox" name="brand" /> Classic Aroma</label>
+          <label><input type="checkbox" name="brand" /> Fragrance World</label>
+        </div>
+
+        <div class="filter-box">
+          <label><strong>Customer Rating</strong></label>
+          <label><input type="checkbox" name="rating" /> 5 Stars</label>
+          <label><input type="checkbox" name="rating" /> 4 Stars & Up</label>
+          <label><input type="checkbox" name="rating" /> 3 Stars & Up</label>
+          <label><input type="checkbox" name="rating" /> 2 Stars & Up</label>
+        </div>
+      </aside>
+
+      <!-- Products Grid -->
+      <section class="products-section">
+        <div class="products-header">
+          <span>Showing 5 products</span>
+          <select class="sort-select" aria-label="Sort products">
+            <option selected>Sort by: Featured</option>
+            <option>Sort by: Price: Low to High</option>
+            <option>Sort by: Price: High to Low</option>
+            <option>Sort by: Customer Rating</option>
+          </select>
+        </div>
+
+        <div class="products-grid" aria-label="Perfumes Products">
+          <article class="product-card" tabindex="0">
+            <img src="assets/image/perfume1.jpeg" alt="Perfume 1" />
+            <div class="brand">Luxury Scents</div>
+            <div class="product-title">Eau de Parfum No. 1</div>
+            <div class="rating" aria-label="4.5 star rating">
+              <span class="count">(1,245)</span>
+            </div>
+            <div class="price">₹4,999</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </article>
+
+          <article class="product-card" tabindex="0">
+            <img src="assets/image/perfume2.jpeg" alt="Perfume 2" />
+            <div class="brand">Luxury Scents</div>
+            <div class="product-title">Eau de Parfum No. 2</div>
+            <div class="rating" aria-label="4.7 star rating">
+              <span class="count">(982)</span>
+            </div>
+            <div class="price">₹5,499</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </article>
+
+          <article class="product-card" tabindex="0">
+            <img src="assets/image/perfume3.jpeg" alt="Perfume 3" />
+            <div class="brand">Luxury Scents</div>
+            <div class="product-title">Eau de Parfum No. 3</div>
+            <div class="rating" aria-label="4.6 star rating">
+              <span class="count">(2,312)</span>
+            </div>
+            <div class="price">₹5,999</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </article>
+
+          <article class="product-card" tabindex="0">
+            <img src="assets/image/perfume4.jpeg" alt="Perfume 4" />
+            <div class="brand">Luxury Scents</div>
+            <div class="product-title">Eau de Parfum No. 4</div>
+            <div class="rating" aria-label="4.4 star rating">
+              <span class="count">(1,125)</span>
+            </div>
+            <div class="price">₹4,799</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </article>
+
+          <article class="product-card" tabindex="0">
+            <img src="assets/image/perfume5.jpeg" alt="Perfume 5" />
+            <div class="brand">Luxury Scents</div>
+            <div class="product-title">Eau de Parfum No. 5</div>
+            <div class="rating" aria-label="4.8 star rating">
+              <span class="count">(1,768)</span>
+            </div>
+            <div class="price">₹6,299</div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </article>
+        </div>
+      </section>
+<script>
+  // A simple cart array
+  let cart = [];
+
+  // Attach click handlers to all Add to Cart buttons
+  document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+    button.addEventListener('click', function () {
+      // Get the product info from the card
+      let card = this.closest('.product-card');
+      let title = card.querySelector('.product-title').innerText;
+      let price = card.querySelector('.price').innerText;
+      
+      // Add to cart array
+      cart.push({ title, price });
+      
+      // Example feedback
+      alert(`${title} has been added to your cart!`);
+      console.log('Cart:', cart);
+    });
+  });
+</script>
+
+
+    </div>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <script>
+    // Load footer.html into the placeholder
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-placeholder').innerHTML = data;
+      })
+      .catch(err => console.error('Footer failed to load:', err));
+  </script>
+</body>
+
+</html>

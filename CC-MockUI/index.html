@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Responsive E-Commerce UI</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+    <header>
+        <div class="navbar">
+            <div class="logo">Craze Crompt</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="category.html">Shop</a></li>
+                    <li><a href="arts.html">Arts</a></li>
+                    <li><a href="perfumes.html">Perfumes</a></li>
+                    <li><a href="clothes.html">Clothes</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-icons">
+                <a href="cart.html" title="Cart" style="text-decoration: none; color: inherit; font-size: 1.5rem;">
+                    &#128722;
+                </a>
+                <a href="login.html" class="login-btn" aria-label="Login">
+                    <i class="fas fa-user"></i>
+                </a>
+
+            </div>
+        </div>
+        <div class="search-bar">
+            <i class="fa fa-search"></i>
+            <input type="search" id="categorySearch" placeholder="Search product" />
+        </div>
+    </header>
+
+
+    <main>
+        <!-- Intro Section instead of Hero image -->
+        <section class="intro">
+            <div class="intro-content">
+                <h1>
+                    Discover <span>Elegance</span>
+                </h1>
+                <p>
+                    Premium collection of arts, perfumes, and fashion for the discerning taste
+                </p>
+                <div class="intro-buttons">
+                    <a href="category.html" class="btn-primary">Shop Now</a>
+                    <a href="arts.html" class="btn-secondary">Explore Arts</a>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Featured Categories Section -->
+        <section style="max-width: 1200px; margin: 0 auto 3rem; padding: 0 1rem; text-align: center;">
+            <h2 style="font-weight: 700; font-size: 2rem; margin-bottom: 0.5rem;">Featured Categories</h2>
+            <p style="color: #555; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Explore our carefully curated collections designed to inspire and delight.
+            </p>
+
+            <div class="categories" aria-label="Featured Categories"
+                style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+
+                <!-- Arts -->
+                <a href="arts.html" class="category-card category-arts" tabindex="0"
+                    style="flex: 1 1 220px; max-width: 220px; display: flex; flex-direction: column; align-items: center; text-decoration: none; color: inherit;">
+                    <div
+                        style="width: 220px; height: 150px; background: url('assets/image/art.jpeg') center/cover no-repeat; border-radius: 8px;">
+                    </div>
+                    <div style="font-weight: 700; font-size: 1.2rem; margin-top: 0.5rem;">Arts</div>
+                    <p style="color: #555; font-size: 0.9rem; margin-top: 0.3rem; max-width: 220px;">
+                        Discover unique artworks and creative pieces.
+                    </p>
+                </a>
+
+                <!-- Perfumes -->
+                <a href="perfumes.html" class="category-card category-perfumes" tabindex="0"
+                    style="flex: 1 1 220px; max-width: 220px; display: flex; flex-direction: column; align-items: center; text-decoration: none; color: inherit;">
+                    <div
+                        style="width: 220px; height: 150px; background: url('assets/image/perfume.jpeg') center/cover no-repeat; border-radius: 8px;">
+                    </div>
+                    <div style="font-weight: 700; font-size: 1.2rem; margin-top: 0.5rem;">Perfumes</div>
+                    <p style="color: #555; font-size: 0.9rem; margin-top: 0.3rem; max-width: 220px;">
+                        Exquisite fragrance for every occasion.
+                    </p>
+                </a>
+
+                <!-- Clothes -->
+                <a href="clothes.html" class="category-card category-clothes" tabindex="0"
+                    style="flex: 1 1 220px; max-width: 220px; display: flex; flex-direction: column; align-items: center; text-decoration: none; color: inherit;">
+                    <div
+                        style="width: 220px; height: 150px; background: url('assets/image/clothes.jpeg') center/cover no-repeat; border-radius: 8px;">
+                    </div>
+                    <div style="font-weight: 700; font-size: 1.2rem; margin-top: 0.5rem;">Clothes</div>
+                    <p style="color: #555; font-size: 0.9rem; margin-top: 0.3rem; max-width: 220px;">
+                        Fashion-forward clothing and accessories.
+                    </p>
+                </a>
+            </div>
+        </section>
+
+        <br>
+        <br>
+
+        <!-- Featured Products Section -->
+        <section style="max-width: 1200px; margin: 0 auto 3rem; padding: 0 1rem;">
+            <h2 style="font-weight: 700; font-size: 2rem; margin-bottom: 0.5rem;">Featured Products</h2>
+            <p style="color: #555; margin-bottom: 2rem;text-align: center;">
+                Handpicked items that showcase the best of our collection.
+            </p>
+
+            <div class="products-grid" aria-label="Featured Products">
+                <!-- Arts -->
+                <article class="product-card" data-name="Modern Art Canvas" data-price="2499" data-brand="brandA"
+                    data-rating="4">
+                    <img src="assets/image/art1.jpeg" alt="Modern Art Canvas" />
+                    <div class="product-info">
+                        <div class="product-name">Modern Art Canvas</div>
+                        <div class="product-price">₹2,499</div>
+                        <button class="add-to-cart-btn1">Add to Cart</button>
+                       
+                    </div>
+                </article>
+
+                <article class="product-card" data-name="Luxury Fragrance" data-price="2599" data-brand="brandB"
+                    data-rating="5">
+                    <img src="assets/image/perfume2.jpeg" alt="Luxury Fragrance" />
+                    <div class="product-info">
+                        <div class="product-name">Luxury Fragrance</div>
+                        <div class="product-price">₹2,599</div>
+                        <button class="add-to-cart-btn1">Add to Cart</button>
+                    </div>
+                </article>
+
+
+                <article class="product-card" data-name="Ocean Breeze" data-price="1599" data-brand="brandB"
+                    data-rating="4">
+                    <img src="assets/image/perfume5.jpeg" alt="Ocean Breeze" />
+                    <div class="product-info">
+                        <div class="product-name">Ocean Breeze</div>
+                        <div class="product-price">₹1,599</div>
+                        <button class="add-to-cart-btn1">Add to Cart</button>
+                    </div>
+                </article>
+
+                <article class="product-card" data-name="Painter Creating Artwork" data-price="44999"
+                    data-brand="brandA" data-rating="4">
+                    <img src="assets/image/art2.jpeg" alt="Painter Creating Artwork" />
+                    <div class="product-info">
+                        <div class="product-name">Painter Creating Artwork</div>
+                        <div class="product-price">₹44,999</div>
+                        <button class="add-to-cart-btn1">Add to Cart</button>
+                    </div>
+                </article>
+
+                <!-- <article class="product-card" data-name="Artist Using Watercolors" data-price="18999"
+                    data-brand="brandA" data-rating="4">
+                    <img src="assets/image/art3.jpeg" alt="Artist Using Watercolors" />
+                    <div class="product-info">
+                        <div class="product-name">Artist Using Watercolors</div>
+                        <div class="product-price">₹18,999</div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </article> -->
+
+                <!-- <article class="product-card" data-name="Abstract Painting" data-price="25999" data-brand="brandA"
+                    data-rating="5">
+                    <img src="assets/image/art4.jpeg" alt="Abstract Painting" />
+                    <div class="product-info">
+                        <div class="product-name">Abstract Painting</div>
+                        <div class="product-price">₹25,999</div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </article> -->
+                <!-- Perfumes -->
+                <!-- <article class="product-card" data-name="Elegant Perfume" data-price="1799" data-brand="brandB"
+                    data-rating="5">
+                    <img src="assets/image/perfume1.jpeg" alt="Elegant Perfume" />
+                    <div class="product-info">
+                        <div class="product-name">Elegant Perfume</div>
+                        <div class="product-price">₹1,799</div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </article> -->
+
+                <article class="product-card" data-name="Classic Aroma" data-price="1999" data-brand="brandB"
+                    data-rating="4">
+                    <img src="assets/image/perfume3.jpeg" alt="Classic Aroma" />
+                    <div class="product-info">
+                        <div class="product-name">Classic Aroma</div>
+                        <div class="product-price">₹1,999</div>
+                        <button class="add-to-cart-btn1">Add to Cart</button>
+                    </div>
+                </article>
+
+                <article class="product-card" data-name="Rose Essence" data-price="2999" data-brand="brandB"
+                    data-rating="5">
+                    <img src="assets/image/perfume4.jpeg" alt="Rose Essence" />
+                    <div class="product-info">
+                        <div class="product-name">Rose Essence</div>
+                        <div class="product-price">₹2,999</div>
+                        <button class="add-to-cart-btn1">Add to Cart</button>
+                    </div>
+                </article>
+
+
+                <!-- Clothes -->
+                <article class="product-card" data-name="Fashionable Jacket" data-price="3299" data-brand="brandC"
+                    data-rating="3">
+                    <img src="assets/image/clothes1.jpeg" alt="Fashionable Jacket" />
+                    <div class="product-info">
+                        <div class="product-name">Fashionable Jacket</div>
+                        <div class="product-price">₹3,299</div>
+                        <button class="add-to-cart-btn1">Add to Cart</button>
+                    </div>
+                </article>
+
+                <article class="product-card" data-name="Casual Shirt" data-price="1299" data-brand="brandC"
+                    data-rating="4">
+                    <img src="assets/image/clothes2.jpeg" alt="Casual Shirt" />
+                    <div class="product-info">
+                        <div class="product-name">Casual Shirt</div>
+                        <div class="product-price">₹1,299</div>
+                        <button class="add-to-cart-btn1">Add to Cart</button>
+                    </div>
+                </article>
+
+                <article class="product-card" data-name="Nature Scene Canvas" data-price="14999" data-brand="brandA"
+                    data-rating="4">
+                    <img src="assets/image/art5.jpeg" alt="Nature Scene Canvas" />
+                    <div class="product-info">
+                        <div class="product-name">Nature Scene Canvas</div>
+                        <div class="product-price">₹14,999</div>
+                        <button class="add-to-cart-btn1">Add to Cart</button>
+                    </div>
+                </article>
+
+                <!-- <article class="product-card" data-name="Summer Dress" data-price="1799" data-brand="brandC"
+                    data-rating="5">
+                    <img src="assets/image/clothes3.jpeg" alt="Summer Dress" />
+                    <div class="product-info">
+                        <div class="product-name">Formal Blazer</div>
+                        <div class="product-price">₹1,799</div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </article> -->
+
+                <article class="product-card" data-name="Denim Jeans" data-price="1499" data-brand="brandC"
+                    data-rating="4">
+                    <img src="assets/image/clothes4.jpeg" alt="Denim Jeans" />
+                    <div class="product-info">
+                        <div class="product-name">Hoodie</div>
+                        <div class="product-price">₹1,499</div>
+                        <button class="add-to-cart-btn1">Add to Cart</button>
+                    </div>
+                </article>
+
+                <article class="product-card" data-name="Winter Coat" data-price="4999" data-brand="brandC"
+                    data-rating="5">
+                    <img src="assets/image/clothes5.jpeg" alt="Winter Coat" />
+                    <div class="product-info">
+                        <div class="product-name">Kids</div>
+                        <div class="product-price">₹2,000</div>
+                        <button class="add-to-cart-btn1">Add to Cart</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Load footer.html into the placeholder
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(err => console.error('Footer failed to load:', err));
+    </script>
+
+
+</body>
+
+</html>

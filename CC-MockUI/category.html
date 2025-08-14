@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css" />
+  <title>Category - ShopEase</title>
+  <style>
+    /* === ShopEase common base styles === */
+
+    main {
+      /* max-width: 700px; */
+      margin: 2rem auto;
+      padding: 0 1rem 3rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    /* Layout container for filters + products */
+    .page-container {
+      display: flex;
+      gap: 2rem;
+    }
+
+    /* Filters sidebar */
+    .filters {
+      flex: 0 0 220px;
+      background: #fff;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+    }
+
+    .filters h3 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      font-size: 1.2rem;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 0.5rem;
+    }
+
+    .filters label {
+      display: block;
+      margin-bottom: 0.7rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .filters select {
+      width: 100%;
+      padding: 0.4rem 0.6rem;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      font-size: 0.95rem;
+      margin-top: 0.3rem;
+    }
+
+    /* Products grid */
+    .products-section {
+      flex: 1;
+    }
+
+    .products-grid {
+      display: grid;
+      /* grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); */
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      background: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-card:hover {
+      transform: scale(1.03);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 400px;
+      /* fixed height for uniform size */
+      object-fit: cover;
+      /* crop image to fill the box */
+      border-radius: 8px;
+      /* optional rounded corners */
+      display: block;
+    }
+
+    .product-info {
+      text-align: center;
+      flex-grow: 1;
+    }
+
+    .product-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 0.3rem;
+      color: #0f172a;
+    }
+
+    .product-price {
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .add-cart-btn {
+      background-color: #0f172a;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.2s ease;
+      width: 100%;
+    }
+
+    .add-cart-btn:hover {
+      background-color: #475569;
+    }
+
+    /* Responsive filters toggle for small screens */
+    .filter-toggle {
+      display: none;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      color: #3498db;
+      background: none;
+      border: none;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .page-container {
+        flex-direction: column;
+      }
+
+      .filters {
+        flex: none;
+        width: 100%;
+        box-shadow: none;
+        padding: 0;
+        margin-bottom: 1rem;
+      }
+
+      .filter-toggle {
+        display: block;
+      }
+
+      .filters.collapsed {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="navbar">
+      <div class="logo">Craze Crompt</div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="category.html" class="active">Shop</a></li>
+          <li><a href="arts.html">Arts</a></li>
+          <li><a href="perfumes.html">Perfumes</a></li>
+          <li><a href="clothes.html">Clothes</a></li>
+        </ul>
+      </nav>
+      <div class="nav-icons">
+        <!-- Removed search icon -->
+        <a href="cart.html" title="Cart">&#128722;</a>
+      </div>
+    </div>
+    <div class="search-bar">
+      <i class="fa fa-search"></i>
+      <input type="search" id="categorySearch" placeholder="Search product" />
+    </div>
+  </header>
+
+
+  <main>
+    <h1>Shop All Products</h1>
+    <p class="subtitle">Browse our complete collection of arts, perfumes, and fashion</p>
+
+    <br>
+
+    <button class="filter-toggle" id="filterToggleBtn">Show Filters &#x25BC;</button>
+
+    <div class="page-container">
+      <aside class="filters collapsed" id="filterPanel">
+        <h3>Filters</h3>
+        <label>
+          Price:
+          <select id="priceFilter">
+            <option value="all">All</option>
+            <option value="low">Under ₹2000</option>
+            <option value="mid">₹2000 - ₹3000</option>
+            <option value="high">Above ₹3000</option>
+          </select>
+        </label>
+
+        <label style="margin-top: 1rem;">
+          Brand:
+          <select id="brandFilter">
+            <option value="all">All</option>
+            <option value="brandA">Brand A</option>
+            <option value="brandB">Brand B</option>
+            <option value="brandC">Brand C</option>
+          </select>
+        </label>
+
+        <label style="margin-top: 1rem;">
+          Rating:
+          <select id="ratingFilter">
+            <option value="all">All</option>
+            <option value="4">4 stars & up</option>
+            <option value="3">3 stars & up</option>
+            <option value="2">2 stars & up</option>
+          </select>
+        </label>
+      </aside>
+
+      <section class="products-section">
+        <div class="products-grid" id="productsGrid" aria-label="Products Grid">
+
+          <!-- Arts -->
+          <div class="product-card">
+            <img src="assets/image/art1.jpeg" alt="Art 1" />
+            <div class="product-info">
+              <p class="category">FINE ARTS</p>
+              <h3 class="product-name">Landscape Canvas</h3>
+              <p class="reviews">(14,782)</p>
+              <p class="product-price">₹25,999</p>
+              <button class="add-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <img src="assets/image/perfume2.jpeg" alt="Perfume 2" />
+            <div class="product-info">
+              <p class="category">PERFUMES</p>
+              <h3 class="product-name">Floral Essence</h3>
+              <p class="reviews">(4,512)</p>
+              <p class="product-price">₹3,499</p>
+              <button class="add-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <img src="assets/image/art3.jpeg" alt="Art 3" />
+            <div class="product-info">
+              <p class="category">FINE ARTS</p>
+              <h3 class="product-name">Modern Acrylic Canvas</h3>
+              <p class="reviews">(9,832)</p>
+              <p class="product-price">₹18,999</p>
+              <button class="add-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <img src="assets/image/art4.jpeg" alt="Art 4" />
+            <div class="product-info">
+              <p class="category">FINE ARTS</p>
+              <h3 class="product-name">Painter Creating Artwork</h3>
+              <p class="reviews">(7,421)</p>
+              <p class="product-price">₹44,999</p>
+              <button class="add-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <img src="assets/image/art5.jpeg" alt="Art 5" />
+            <div class="product-info">
+              <p class="category">FINE ARTS</p>
+              <h3 class="product-name">Artist Using Watercolors</h3>
+              <p class="reviews">(10,215)</p>
+              <p class="product-price">₹18,499</p>
+              <button class="add-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+
+
+
+          <!-- Clothes -->
+          <div class="product-card">
+            <img src="assets/image/clothes1.jpeg" alt="Clothes 1" />
+            <div class="product-info">
+              <p class="category">FASHION</p>
+              <h3 class="product-name">Casual T-Shirt</h3>
+              <p class="reviews">(8,412)</p>
+              <p class="product-price">₹999</p>
+              <button class="add-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <img src="assets/image/art2.jpeg" alt="Art 2" />
+            <div class="product-info">
+              <p class="category">FINE ARTS</p>
+              <h3 class="product-name">Contemporary Wall Art</h3>
+              <p class="reviews">(11,934)</p>
+              <p class="product-price">₹20,499</p>
+              <button class="add-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+
+
+
+          <div class="product-card">
+            <img src="assets/image/clothes3.jpeg" alt="Clothes 3" />
+            <div class="product-info">
+              <p class="category">FASHION</p>
+              <h3 class="product-name">Denim Jeans</h3>
+              <p class="reviews">(9,821)</p>
+              <p class="product-price">₹2,499</p>
+              <button class="add-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <img src="assets/image/clothes4.jpeg" alt="Clothes 4" />
+            <div class="product-info">
+              <p class="category">FASHION</p>
+              <h3 class="product-name">Hoodie</h3>
+              <p class="reviews">(4,391)</p>
+              <p class="product-price">₹1,799</p>
+              <button class="add-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <img src="assets/image/clothes5.jpeg" alt="Clothes 5" />
+            <div class="product-info">
+              <p class="category">FASHION</p>
+              <h3 class="product-name">Party Gown</h3>
+              <p class="reviews">(2,149)</p>
+              <p class="product-price">₹3,499</p>
+              <button class="add-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <!-- Perfumes -->
+
+          <div class="product-card">
+            <img src="assets/image/perfume1.jpeg" alt="Perfume 1" />
+            <div class="product-info">
+              <p class="category">PERFUMES</p>
+              <h3 class="product-name">Luxury Scent</h3>
+              <p class="reviews">(5,921)</p>
+              <p class="product-price">₹5,999</p>
+              <button class="add-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <img src="assets/image/clothes2.jpeg" alt="Clothes 2" />
+            <div class="product-info">
+              <p class="category">FASHION</p>
+              <h3 class="product-name">Formal Shirt</h3>
+              <p class="reviews">(5,239)</p>
+              <p class="product-price">₹1,499</p>
+              <button class="add-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+
+
+
+          <div class="product-card">
+            <img src="assets/image/perfume3.jpeg" alt="Perfume 3" />
+            <div class="product-info">
+              <p class="category">PERFUMES</p>
+              <h3 class="product-name">Woody Aroma</h3>
+              <p class="reviews">(6,124)</p>
+              <p class="product-price">₹4,299</p>
+              <button class="add-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <img src="assets/image/perfume4.jpeg" alt="Perfume 4" />
+            <div class="product-info">
+              <p class="category">PERFUMES</p>
+              <h3 class="product-name">Citrus Splash</h3>
+              <p class="reviews">(7,894)</p>
+              <p class="product-price">₹3,899</p>
+              <button class="add-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <img src="assets/image/perfume5.jpeg" alt="Perfume 5" />
+            <div class="product-info">
+              <p class="category">PERFUMES</p>
+              <h3 class="product-name">Oriental Luxury</h3>
+              <p class="reviews">(9,321)</p>
+              <p class="product-price">₹6,499</p>
+              <button class="add-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <img src="assets/image/art6.jpeg" alt="Art 6" />
+            <div class="product-info">
+              <p class="category">FINE ARTS</p>
+              <h3 class="product-name">Modern Art Canvas</h3>
+              <p class="reviews">(8,213)</p>
+              <p class="product-price">₹2,499</p>
+              <button class="add-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    (() => {
+      // --- Filter panel toggle ---
+      const filterToggleBtn = document.getElementById('filterToggleBtn');
+      const filterPanel = document.getElementById('filterPanel');
+      if (filterToggleBtn && filterPanel) {
+        filterToggleBtn.addEventListener('click', () => {
+          const isCollapsed = filterPanel.classList.toggle('collapsed');
+          filterToggleBtn.textContent = isCollapsed ? 'Show Filters ▼' : 'Hide Filters ▲';
+        });
+      }
+
+      // --- Controls ---
+      const categorySearch = document.getElementById('categorySearch'); // header search
+      const priceFilter = document.getElementById('priceFilter');
+      const brandFilter = document.getElementById('brandFilter');
+      const ratingFilter = document.getElementById('ratingFilter');
+      const productsGrid = document.getElementById('productsGrid');
+
+      const cards = () =>
+        Array.from(productsGrid?.querySelectorAll('.product-card') || []);
+
+      // Map categories to placeholder brands so your Brand select works
+      // brandA → FINE ARTS, brandB → FASHION, brandC → PERFUMES
+      function inferBrandFromCategory(cat = '') {
+        const c = cat.toLowerCase();
+        if (c.includes('fine') || c.includes('art')) return 'brandA';
+        if (c.includes('fashion') || c.includes('clothes')) return 'brandB';
+        if (c.includes('perfume')) return 'brandC';
+        return '';
+      }
+
+      // Helpers to read values from DOM when data-* is not present
+      function getName(card) {
+        const fromData = card.dataset?.name || '';
+        const fromDom = card.querySelector('.product-name')?.textContent || '';
+        return (fromData || fromDom).trim().toLowerCase();
+      }
+
+      function getCategory(card) {
+        return (
+          card.dataset?.category ||
+          card.querySelector('.category')?.textContent ||
+          ''
+        ).trim();
+      }
+
+      function getPrice(card) {
+        if (card.dataset?.price) {
+          const n = Number(card.dataset.price);
+          if (!Number.isNaN(n)) return n;
+        }
+        const txt = card.querySelector('.product-price')?.textContent || '0';
+        const num = txt.replace(/[^\d]/g, ''); // strip ₹ and commas
+        return Number(num) || 0;
+      }
+
+      function getBrand(card) {
+        return card.dataset?.brand || inferBrandFromCategory(getCategory(card));
+      }
+
+      function getRating(card) {
+        if (card.dataset?.rating) {
+          const n = Number(card.dataset.rating);
+          if (!Number.isNaN(n)) return n;
+        }
+        return 5; // default rating if not provided
+      }
+
+      function filterProducts() {
+        const searchText = (categorySearch?.value || '').toLowerCase();
+        const priceVal = priceFilter?.value || 'all';
+        const brandVal = brandFilter?.value || 'all';
+        const ratingVal = ratingFilter?.value || 'all';
+
+        cards().forEach((card) => {
+          const name = getName(card);
+          const category = getCategory(card).toLowerCase();
+          const price = getPrice(card);
+          const brand = getBrand(card); // brandA/B/C via category mapping
+          const rating = getRating(card);
+
+          const matchesSearch =
+            !searchText || name.includes(searchText) || category.includes(searchText);
+
+          let matchesPrice = true;
+          if (priceVal === 'low') matchesPrice = price < 2000;
+          else if (priceVal === 'mid') matchesPrice = price >= 2000 && price <= 3000;
+          else if (priceVal === 'high') matchesPrice = price > 3000;
+
+          const matchesBrand = brandVal === 'all' || brand === brandVal;
+          const matchesRating = ratingVal === 'all' || rating >= Number(ratingVal);
+
+          card.style.display =
+            matchesSearch && matchesPrice && matchesBrand && matchesRating ? '' : 'none';
+        });
+      }
+
+      // Event listeners
+      categorySearch?.addEventListener('input', filterProducts);
+      priceFilter?.addEventListener('change', filterProducts);
+      brandFilter?.addEventListener('change', filterProducts);
+      ratingFilter?.addEventListener('change', filterProducts);
+
+      // Add to Cart alert (robust to missing data-*)
+      productsGrid?.addEventListener('click', (e) => {
+        if (!e.target.classList.contains('add-cart-btn')) return;
+        const card = e.target.closest('.product-card');
+        const name =
+          card.querySelector('.product-name')?.textContent ||
+          card.dataset?.name ||
+          'Item';
+        alert(`Added "${name}" to cart!`);
+        // TODO: real cart logic
+      });
+
+      // Initial filter on load
+      filterProducts();
+    })();
+  </script>
+
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <script>
+    // Load footer.html into the placeholder
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-placeholder').innerHTML = data;
+      })
+      .catch(err => console.error('Footer failed to load:', err));
+  </script>
+
+</body>
+
+</html>

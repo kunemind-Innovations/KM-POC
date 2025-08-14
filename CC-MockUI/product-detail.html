@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Product Detail - ShopEase</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .product-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .product-image {
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .product-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .product-name {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #2c3e50;
+    }
+
+    .product-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #27ae60;
+    }
+
+    .product-description {
+      line-height: 1.5;
+      color: #555;
+    }
+
+    .quantity-selector {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      max-width: 140px;
+    }
+
+    .quantity-selector button {
+      background: #3498db;
+      border: none;
+      color: white;
+      padding: 0.3rem 0.7rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      border-radius: 4px;
+      user-select: none;
+      transition: background-color 0.3s;
+    }
+
+    .quantity-selector button:hover {
+      background: #2980b9;
+    }
+
+    .quantity-selector input[type="number"] {
+      width: 50px;
+      text-align: center;
+      font-size: 1.2rem;
+      padding: 0.2rem;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    .add-to-cart-btn {
+      background: #27ae60;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      width: fit-content;
+      transition: background-color 0.3s;
+    }
+
+    .add-to-cart-btn:hover {
+      background: #1e8449;
+    }
+
+    @media(min-width: 768px) {
+      main {
+        flex-direction: row;
+        gap: 3rem;
+      }
+
+      .product-image,
+      .product-info {
+        flex: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="navbar">
+      <div class="logo">ShopEase</div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="category.html" class="active">Shop</a></li>
+          <li><a href="arts.html">Arts</a></li>
+          <li><a href="perfumes.html">Perfumes</a></li>
+          <li><a href="clothes.html">Clothes</a></li>
+        </ul>
+      </nav>
+      <div class="nav-icons">
+        <!-- Removed search icon -->
+        <a href="cart.html" title="Cart">&#128722;</a>
+      </div>
+    </div>
+    <div class="search-bar">
+      <i class="fa fa-search"></i>
+      <input type="search" id="categorySearch" placeholder="Search product" />
+    </div>
+  </header>
+
+
+  <main>
+    <section class="product-detail" aria-label="Product Detail">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80"
+          alt="Fashionable Jacket" />
+      </div>
+      <div class="product-info">
+        <h1 class="product-name">Fashionable Jacket</h1>
+        <div class="product-price">₹3,299</div>
+        <p class="product-description">
+          This fashionable jacket is made from premium materials to keep you warm and stylish. Perfect for all seasons,
+          with a modern fit and durable stitching.
+        </p>
+        <label for="quantity">Quantity:</label>
+        <div class="quantity-selector">
+          <button type="button" id="decrementQty" aria-label="Decrease quantity">−</button>
+          <input type="number" id="quantity" name="quantity" value="1" min="1" />
+          <button type="button" id="incrementQty" aria-label="Increase quantity">+</button>
+        </div>
+        <button class="add-to-cart-btn" aria-label="Add Fashionable Jacket to cart">Add to Cart</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <script>
+    // Load footer.html into the placeholder
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-placeholder').innerHTML = data;
+      })
+      .catch(err => console.error('Footer failed to load:', err));
+  </script>
+
+  <script>
+    const decrementBtn = document.getElementById('decrementQty');
+    const incrementBtn = document.getElementById('incrementQty');
+    const quantityInput = document.getElementById('quantity');
+
+    decrementBtn.addEventListener('click', () => {
+      let current = parseInt(quantityInput.value, 10);
+      if (current > 1) {
+        quantityInput.value = current - 1;
+      }
+    });
+
+    incrementBtn.addEventListener('click', () => {
+      let current = parseInt(quantityInput.value, 10);
+      quantityInput.value = current + 1;
+    });
+  </script>
+
+</body>
+
+</html>
