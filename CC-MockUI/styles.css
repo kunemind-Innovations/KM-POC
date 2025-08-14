@@ -24,13 +24,24 @@ body {
 
 /* Header & Nav */
 header {
-  background: white;
-  border-bottom: 1px solid #ddd;
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 10;
-  box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+  left: 0;
+  color: #fff;
+  width: 100%;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Optional shadow for depth */
+  z-index: 1000; /* Keeps it above other elements */
 }
+
+/* Push page content down so it’s not hidden under the fixed header */
+body {
+  margin: 0;
+  padding-top: 120px; /* Adjust based on your header height */
+}
+
+/* Navbar styling */
+
 
 .navbar {
   max-width: 1200px;
@@ -44,7 +55,7 @@ header {
 .logo {
   font-weight: 700;
   font-size: 1.5rem;
-  color: #2c3e50;
+  color: #ffffff; /* white text for contrast */
   cursor: pointer;
   user-select: none;
 }
@@ -57,7 +68,7 @@ nav ul {
 
 nav ul li a {
   font-weight: 600;
-  color: #1e293b;
+  color: #ffffff; /* white text for contrast */
   padding: 0.3rem 0.5rem;
   border-radius: 4px;
   transition: background-color 0.2s ease, color 0.2s ease;
@@ -110,34 +121,36 @@ nav ul li a.active {
 
 /* Search Bar */
 .search-bar {
-  max-width: 1200px;
-  margin: 0.5rem auto 1.5rem auto;
-  padding: 0 1rem;
   position: relative;
-}
-
-.search-bar i {
-  position: absolute;
-  left: 1.5rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #888;
-  font-size: 1rem;
+  display: flex;
+  padding: 10px;
+  justify-content: center;
 }
 
 .search-bar input[type="search"] {
-  width: 100%;
-  padding: 0.75rem 1rem 0.75rem 2.5rem;
-  /* space for icon */
+  width: 30%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem; /* space for icon */
   border-radius: 6px;
   border: 1px solid #ccc;
   font-size: 1rem;
-  transition: border-color 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .search-bar input[type="search"]:focus {
+  border-color: #666;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   outline: none;
-  border-color: #3498db;
+}
+
+.search-icon {
+  position: absolute;
+  left: calc(50% - 15% + 0.8rem); /* dynamic centering inside input */
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 1.2rem;
+  color: #888;
 }
 
 
@@ -367,7 +380,8 @@ main {
   /* Black background */
   color: white;
   border: none;
-  padding: 0.5rem 0;
+  padding: 0.75rem;
+  width: 12rem;
   border-radius: 4px;
   cursor: pointer;
   font-weight: 600;

@@ -4,18 +4,22 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<title>Shopping Cart - ShopEase</title>
+<title>Shopping Cart - Craze Crompt</title>
 <link rel="stylesheet" href="styles.css" />
 <style>
-  main {
-    max-width: 900px;
-    margin: 2rem auto;
-    padding: 0 1rem 3rem;
-  }
+  .cart-page {
+  margin-top: 90px; /* space below the fixed header */
+  padding: 0 20px;   /* side padding */
+}
+
+.cart-page h1 {
+  margin-bottom: 20px; /* space below title */
+}
 
   .cart-table {
     width: 100%;
     border-collapse: collapse;
+    margin: auto;
   }
 
   .cart-table th, .cart-table td {
@@ -120,7 +124,7 @@
 
 <header>
   <div class="navbar">
-    <div class="logo">ShopEase</div>
+    <div class="logo">Craze Crompt</div>
     <nav>
       <ul>
         <li><a href="index.html">Home</a></li>
@@ -136,11 +140,12 @@
     </div>
   </div>
   <div class="search-bar">
-    <input type="search" id="categorySearch" placeholder="Search in category..." />
+    <span class="search-icon">🔍</span>
+    <input type="search" placeholder="Search...">
   </div>
 </header>
 
-
+<div class="cart-page">
 <main>
   <h1>Your Shopping Cart</h1>
   <table class="cart-table" aria-label="Shopping Cart Items">
@@ -195,19 +200,52 @@
   </div>
   <button class="checkout-btn" onclick="window.location.href='checkout.html'">Proceed to Checkout</button>
 </main>
+</div>
 
  <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
 
-    <script>
-      // Load footer.html into the placeholder
-      fetch('footer.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('footer-placeholder').innerHTML = data;
-        })
-        .catch(err => console.error('Footer failed to load:', err));
-    </script>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-grid">
+          <div class="footer-section">
+            <h3>Fashion</h3>
+            <p>Your destination for arts, perfumes, and fashion that defines your unique style.</p>
+          </div>
+  
+          <div class="footer-section">
+            <h4>Shop</h4>
+            <ul>
+              <li><a href="category/arts.html">Arts</a></li>
+              <li><a href="category/perfumes.html">Perfumes</a></li>
+              <li><a href="category/clothes.html">Clothes</a></li>
+            </ul>
+          </div>
+  
+          <div class="footer-section">
+            <h4>Support</h4>
+            <ul>
+              <li><a href="contact.html">Contact Us</a></li>
+              <li><a href="shipping.html">Shipping Info</a></li>
+              <li><a href="returns.html">Returns</a></li>
+            </ul>
+          </div>
+  
+          <div class="footer-section">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="terms.html">Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
+  
+        <div class="footer-bottom">
+          <p>© 2025 Craze Crompt. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
 
 <script>
   function updateSubtotal(row) {

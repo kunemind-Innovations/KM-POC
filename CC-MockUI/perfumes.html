@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <title>Perfumes - ShopEase</title>
+  <title>Perfumes - Craze Crompt</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
     main {
@@ -190,9 +190,10 @@
       background-color: #000000;
       /* Black background */
       color: white;
-      padding: 0.5rem 1rem;
+      padding: 0.75rem;
       border: none;
       border-radius: 6px;
+      width: fit-content;
       cursor: pointer;
       font-weight: 600;
       transition: background-color 0.2s ease;
@@ -231,8 +232,8 @@
       </div>
     </div>
     <div class="search-bar">
-      <i class="fa fa-search"></i>
-      <input type="search" id="categorySearch" placeholder="Search product" />
+      <span class="search-icon">🔍</span>
+      <input type="search" placeholder="Search...">
     </div>
   </header>
 
@@ -377,15 +378,47 @@
   <!-- Footer Placeholder -->
   <div id="footer-placeholder"></div>
 
-  <script>
-    // Load footer.html into the placeholder
-    fetch('footer.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('footer-placeholder').innerHTML = data;
-      })
-      .catch(err => console.error('Footer failed to load:', err));
-  </script>
+  <footer>
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3>Fashion</h3>
+          <p>Your destination for arts, perfumes, and fashion that defines your unique style.</p>
+        </div>
+
+        <div class="footer-section">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="category/arts.html">Arts</a></li>
+            <li><a href="category/perfumes.html">Perfumes</a></li>
+            <li><a href="category/clothes.html">Clothes</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="shipping.html">Shipping Info</a></li>
+            <li><a href="returns.html">Returns</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 Craze Crompt. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
 </body>
 
 </html>
